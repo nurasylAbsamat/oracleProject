@@ -43,3 +43,17 @@ BEGIN
     END LOOP;
     CLOSE cur_pop_ders;
 END;
+
+
+DECLARE 
+ v_stud_id Course_selections.stud_id%TYPE;
+    v_term int;
+    v_year int;
+    v_result int;
+BEGIN
+     v_stud_id:='C5428D127389AF64AD12D33D86BA7DBC2E2D9B23';
+     v_term:=2;
+     v_year:=2019;
+     v_result:=find_retakes(v_stud_id,v_term,v_year);
+     DBMS_OUTPUT.PUT_LINE('The sum for 1 semester is : '||v_result);
+END;
