@@ -69,3 +69,16 @@ BEGIN
      v_result:=find_retakes2(v_stud_id);
      DBMS_OUTPUT.PUT_LINE('The sum for 1 semester is : '||v_result);
 END;
+
+DECLARE 
+    v_id int;
+    v_term INT;
+    v_year INT;
+    v_result int;
+BEGIN 
+    v_id :=10166;
+    v_term:=1;
+    v_year:=2015;
+    v_result:=find_teach(v_id,v_term,v_year);
+    DBMS_OUTPUT.PUT_LINE('The hours: '||v_result);
+END;

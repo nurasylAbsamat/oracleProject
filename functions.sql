@@ -32,3 +32,21 @@ BEGIN
    
    RETURN v_sum_retake_money;
 END ;
+
+
+CREATE OR REPLACE FUNCTION find_teach (p_emp_id Course_sections.emp_id_ent%TYPE,
+ p_term Course_sections.term%TYPE,p_year Course_sections.year%TYPE)  RETURN int IS 
+ v_result int DEFAULT 0;
+ v_hour_num int DEFAULT 0;
+  CURSOR find_emp IS SELECT hour_num FROM Course_sections 
+  WHERE emp_id = p_emp_id AND term=p_term AND year=p_year;
+BEGIN 
+   FOR i in find_emp LOOP
+    dbms_output.put_line(i.hour_num||'LOL');
+
+    IF i.hour_num is not null THEN v_result:= v_result+i.hour_num; dbms_output.put_line('Yeah');
+     else v_result:= v_result;
+     END IF;
+     END LOOP;
+     RETURN v_result;
+END;
