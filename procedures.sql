@@ -62,3 +62,26 @@ BEGIN
     p_gpa := v_total / cur_stud%ROWCOUNT;
     CLOSE cur_stud;
 END;
+
+--for find all sum of retakes of student
+CREATE OR REPLACE FUNCTION find_retakes2(p_stud_id Course_selections.stud_id%TYPE) RETURN int IS
+v_credits int default 0;
+v_sum_retake_money int default 0;
+v_retake BOOLEAN;
+CURSOR find_retakes1 IS SELECT qiymet_yuz, credits FROM Course_selections sl INNER JOIN course_sections s ON  
+     s.ders_kod = sl.ders_kod  AND s.section = sl.section 
+    where stud_id = p_stud_id;
+BEGIN
+ FOR i in find_retakes1 LOOP
+    dbms_output.put_line(i.qiymet_yuz);
+     IF i.qiymet_yuz<50 and i.qiymet_yuz is not null THEN 
+        IF i.credits is null THEN v_credits:=3;
+        else v_credits:=i.credits;
+        END IF;
+        v_sum_retake_money:=v_sum_retake_money+(v_credits*34000);
+     else v_retake := false;
+     END IF;   
+   END LOOP;
+   RETURN v_sum_retake_money;
+END ; 
+

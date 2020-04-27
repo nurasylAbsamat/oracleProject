@@ -57,3 +57,15 @@ BEGIN
      v_result:=find_retakes(v_stud_id,v_term,v_year);
      DBMS_OUTPUT.PUT_LINE('The sum for 1 semester is : '||v_result);
 END;
+
+
+DECLARE 
+ v_stud_id Course_selections.stud_id%TYPE;
+
+    v_result NUMBER;
+BEGIN
+      v_stud_id:='B0BFCA1E50BFE669E8A0FD205A1932D841B69D9E';
+
+     v_result:=find_retakes2(v_stud_id);
+     DBMS_OUTPUT.PUT_LINE('The sum for 1 semester is : '||v_result);
+END;
